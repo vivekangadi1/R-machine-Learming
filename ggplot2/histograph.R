@@ -13,7 +13,7 @@ print(pa + geom_histogram(binwidth = 0.001))
 print(pa + geom_histogram(binwidth = 0.1))
 print(pa + geom_histogram(binwidth = 0.1,color='red'))
 print(pa + geom_histogram(binwidth = 0.1,color='red',fill='pink'))
-pa2 <- pa + geom_histogram(binwidth = 0.1,color='red',fill='pink',alpha=2)
+pa2 <- pa + geom_histogram(binwidth = 0.1,color='red',fill='pink',alpha=0.52)
 
 pa3 <- pa2 +xlab('movie Rating') + ylab('counting')
 
@@ -51,7 +51,9 @@ pl2+scale_color_gradient(low = 'blue',high = 'red')
 
 #data and asthetics
 pl <- ggplot(mpg,aes(x=class))
-
+print(pl + geom_bar(aes(fill=drv)))
+print(pl + geom_bar(aes(fill=drv),position = 'fill'))
+print(pl + geom_bar(aes(fill=drv),position = 'dodge'))
 #geometric
 print(pl+geom_bar())
 print(pl+geom_bar(aes(fill=drv)))
@@ -66,3 +68,11 @@ print(pl+geom_bar(aes(fill=drv),position = 'fill'))
 pl <- ggplot(movies,aes(x=year,y=rating))
 print(pl + geom_bin2d())
 print(pl + geom_bin2d()+scale_fill_gradient(low = "green",high = "red"))
+print(pl + geom_hex()+scale_fill_gradient(low = "green",high = "red"))
+#coordinates and faceting
+ pl <- ggplot(mpg,aes(x=displ,y=hwy)) +geom_point()
+ pl2 <- pl + coord_cartesian(xlim = c(1,4),ylim = c(15,30))
+ pl2 <- pl + facet_grid(. ~ cyl)
+ pl2 <- pl + facet_grid(drv ~ .)
+ pl2 <- pl + facet_grid(drv ~ cyl)
+print(pl2) 
